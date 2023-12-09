@@ -24,7 +24,7 @@ const Board = (props) => {
       <Row>
         {/* To Dos */}
         <Col xs={12} sm={6} lg={3}>
-          <List title="To Dos" items={[{title: 'cardTitle'}]}/>
+          <List title="To Dos" />
         </Col>
         {/* In Progress */}
         <Col xs={12} sm={6} lg={3}>
