@@ -1,0 +1,21 @@
+.list {
+  margin-bottom: 15px;
+}
+
+.list > div.accordion {
+  --bs-accordion-border-width: 0px;
+}
+
+.list__title {
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.list > .accordion > .accordion-item > .accordion-header > button.accordion-button {
+  background-color: #D55BEC;
+  border-color: #D55BEC;
+}
+
+span.list__countPill {
+  color: #E1E1E1;
+}
