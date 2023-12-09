@@ -5,13 +5,14 @@ import {
   Col
 } from 'react-bootstrap';
 
+import List from '../List';
 import './style.css';
 
 const Board = (props) => {
   return (
-    <Container className="board">
+    <Container fluid className="board">
       <Row>
-        <Col>
+        <Col className="board__header">
           <h1>{ props.title }</h1>
         </Col>
       </Row>
@@ -21,7 +22,22 @@ const Board = (props) => {
         </Col>
       </Row>
       <Row>
-        {/** Boards goes here */}
+        {/* To Dos */}
+        <Col xs={12} sm={6} lg={3}>
+          <List title="To Dos" items={[{title: 'cardTitle'}]}/>
+        </Col>
+        {/* In Progress */}
+        <Col xs={12} sm={6} lg={3}>
+          <List title="In Progress" />
+        </Col>
+        {/* Done */}
+        <Col xs={12} sm={6} lg={3}>
+          <List title="Done" />
+        </Col>
+        {/* Delete */}
+        <Col xs={12} sm={6} lg={3}>
+          <List title="Deleted" />
+        </Col>
       </Row>
     </Container>
   );
