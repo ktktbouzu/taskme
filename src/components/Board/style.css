@@ -9,3 +9,7 @@
 .board__titleText {
   margin: 0px;
 }
+
+.board__header {
+  margin-bottom: 20px;
+}
