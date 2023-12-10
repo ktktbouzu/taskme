@@ -37,8 +37,14 @@ const Board = (props: BoardProps) => {
       </Row>
       <Row>
         { props.lists.map((list: ListConfig) => (
-          <Col xs={12} sm={6} lg={3}>
-            <List title={list.name} key={list.id} />
+          <Col 
+            xs={12} 
+            sm={6} 
+            lg={3} 
+            key={`${list.id}-container`}
+            data-testid="list-child"
+          >
+            <List title={list.name} />
           </Col>
         )) }
       </Row>

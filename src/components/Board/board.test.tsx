@@ -7,6 +7,34 @@ test('it should display title as board heading', () => {
 
   render(<Board title={testTitle} />);
 
-  const linkElement = screen.getByRole('heading');
-  expect(linkElement).toHaveTextContent(testTitle);
+  const heading = screen.getByRole('heading');
+  expect(heading).toHaveTextContent(testTitle);
+});
+
+test('it should display Untitled when no title is provided', () => {
+  render(<Board />);
+
+  const heading = screen.getByRole('heading');
+  expect(heading).toHaveTextContent("Untitled");
+});
+
+test('it should display 2 list component when given 2 list data', () => {
+  const testTitle = "todo test";
+
+  const listData = [
+    {
+      name: 'To Dos',
+      id: 'todos'
+    },
+    {
+      name: 'Done',
+      id: 'done'
+    }
+  ];
+
+  render(<Board title={testTitle} lists={listData}/>);
+
+  const listChildren = screen.getAllByTestId('list-child');
+  
+  expect(listChildren.length).toEqual(listData.length);
 });
