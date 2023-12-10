@@ -6,11 +6,23 @@ import {
 
 import './style.css';
 
-const List = ({ title, items }) => {
+type ListProps = {
+  title: string,
+  items: Array<Object>
+};
+
+const listDefaultProps = {
+  title: 'Untitled',
+  items: []
+};
+
+const List = (props: ListProps) => {
+  const { title, items } = props;
+
   return (
     <div className="list">
       <Accordion>
-        <Accordion.Item>
+        <Accordion.Item eventKey="0">
           <Accordion.Header>
             <span className="list__title">{ title }</span>
             { (items && items.length) && (
@@ -27,9 +39,6 @@ const List = ({ title, items }) => {
   )
 };
 
-interface ListProps {
-  title: string,
-  items: Array<Object>
-};
+List.defaultProps = listDefaultProps;
 
 export default List;
