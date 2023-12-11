@@ -1,6 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+
+import { Provider } from 'react-redux';
+
 import Board from './index';
+import { store } from '../../store';
 
 test('it should display title as board heading', () => {
   const testTitle = "todo test";
@@ -32,7 +36,11 @@ test('it should display 2 list component when given 2 list data', () => {
     }
   ];
 
-  render(<Board title={testTitle} lists={listData}/>);
+  render(
+    <Provider store={store}>
+      <Board title={testTitle} lists={listData}/>
+    </Provider>
+  );
 
   const listChildren = screen.getAllByTestId('list-child');
   
