@@ -19,3 +19,8 @@
 span.list__countPill {
   color: #E1E1E1;
 }
+
+.list > .accordion > .accordion-item > .accordion-collapse > div.accordion-body {
+  background-color: #EBEBEB;
+  padding: 10px;
+}

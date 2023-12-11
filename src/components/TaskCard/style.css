@@ -1,0 +1,23 @@
+.taskCard {
+  min-height: 100px;
+  width: 100%;
+  background-color: #FFFFFF;
+  /* border-radius: 5px; */
+  /* border: 1px solid #CFCFCF; */
+  /* padding: 10px; */
+  margin-bottom: 10px;
+}
+
+div.card.taskCard--old {
+  background-color: #F6EEE3
+}
+
+div.taskCard__footer {
+  width: 100%;
+  text-align: right;
+}
+
+div.taskCard__footer > span{
+  font-size: 14px;
+  color: #949494
+}

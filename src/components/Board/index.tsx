@@ -44,7 +44,7 @@ const Board = (props: BoardProps) => {
             key={`${list.id}-container`}
             data-testid="list-child"
           >
-            <List title={list.name} />
+            <List title={list.name} listId={list.id} />
           </Col>
         )) }
       </Row>

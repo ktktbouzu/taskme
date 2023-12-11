@@ -4,6 +4,7 @@
   padding: 25px 15px;
   background-color: #333333;
   color: #FFFFFF;
+  overflow: auto;
 }
 
 .board__titleText {
