@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
 import { Provider } from 'react-redux';
-
 import Board from './index';
 import { store } from '../../store';
 
@@ -28,17 +28,21 @@ test('it should display 2 list component when given 2 list data', () => {
   const listData = [
     {
       name: 'To Dos',
-      id: 'todos'
+      id: 'todos',
+      transitionRules: []
     },
     {
       name: 'Done',
-      id: 'done'
+      id: 'done',
+      transitionRules: []
     }
   ];
 
   render(
     <Provider store={store}>
-      <Board title={testTitle} lists={listData}/>
+      <DndProvider backend={HTML5Backend}>
+        <Board title={testTitle} lists={listData}/>
+      </DndProvider>
     </Provider>
   );
 
