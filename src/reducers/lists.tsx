@@ -10,19 +10,23 @@ const initialState: ListState = {
   listConfigs: [
     {
       name: 'To Dos',
-      id: 'todos'
+      id: 'todos',
+      transitionRules: []
     },
     {
       name: 'In Progress',
-      id: 'in_progress'
+      id: 'in_progress',
+      transitionRules: []
     },
     {
       name: 'Done',
-      id: 'done'
+      id: 'done',
+      transitionRules: []
     },
     {
       name: 'Deleted',
-      id: 'deleted'
+      id: 'deleted',
+      transitionRules: []
     }
   ]
 };

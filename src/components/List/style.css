@@ -23,4 +23,19 @@ span.list__countPill {
 .list > .accordion > .accordion-item > .accordion-collapse > div.accordion-body {
   background-color: #EBEBEB;
   padding: 10px;
+  border-radius: 8px;
+}
+
+div.list__cardWrapper {
+  background-color: transparent;
+  min-height: 50px;
+  padding-bottom: 15px;
+}
+
+div.list__cardWrapper > p {
+  color: #A4A4A4;
+}
+
+div.list__cardWrapper--over {
+  background-color: #CCCCCC;
 }

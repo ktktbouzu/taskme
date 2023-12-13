@@ -3,94 +3,103 @@ import {
   Accordion,
   Badge,
 } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useDrop } from 'react-dnd'
 import { has } from 'lodash';
 
 import TaskCard from '../TaskCard';
+import { transferTask } from '../../reducers/taskCards';
 
 import type { 
-  TaskCardConfig 
+  TaskCardConfig,
+  ListConfig
 } from '../../types';
 import type {
-  RootState
+  RootState,
+  AppDispatch
 } from '../../store';
 
 import './style.css';
 
 type ListProps = {
-  title: string,
-  items: Array<TaskCardConfig>
+  listConfig: ListConfig
 };
 
-type ListWrapperProps = {
-  title: string,
-  listId: string,
-}
+const onDropEvent = (listConfig: ListConfig, dispatch: AppDispatch) => {
+  return (item: { id: string | number, listId: string | number, listIndex: number }) => {
+    console.log(item);
+    const refData = {
+      listId: listConfig.id,
+      fromListId: item.listId,
+      listIndex: item.listIndex,
+      cardId: item.id
+    };
 
-const listDefaultProps = {
-  title: 'Untitled',
-  items: []
+    console.log(refData);
+
+    dispatch(transferTask(refData));
+  }
 };
 
-const listWrapperProps = {
-  title: 'Untitled',
-  listId: ''
-}
+const List = (props: ListProps) => {
+  const { listConfig } = props;
+  let taskItems: Array<TaskCardConfig> = [];
 
-const ListComponent = (props: ListProps) => {
-  const { title, items } = props;
+  /**
+   * Hooks --start
+   */
+  const taskLists = useSelector((state: RootState) => (
+    state.taskCards.listCards
+  ));
+  const dispatch = useDispatch();
+  
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: '',
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop()
+    }),
+    drop: onDropEvent(listConfig, dispatch)
+  }));
+  /**
+   * Hooks --end
+   */
+
+  if (has(taskLists, listConfig.id) && taskLists[listConfig.id]) {
+    taskItems = taskLists[listConfig.id];
+  }
 
   return (
     <div className="list">
-      <Accordion defaultActiveKey="0">
+      <Accordion defaultActiveKey="0" ref={drop}>
         <Accordion.Item eventKey="0">
           <Accordion.Header>
-            <span className="list__title">{ title }</span>
-            { !!items.length && (
+            <span className="list__title">{ listConfig.name }</span>
+            { !!taskItems.length && (
                 <Badge pill bg="secondary" className="list__countPill">
-                  { items.length }
+                  { taskItems.length }
                 </Badge>
               ) 
             }
           </Accordion.Header>
           <Accordion.Body>
-            { items.map((task: TaskCardConfig) => (
-              <TaskCard 
-                title={task.title} 
-                key={task.id} 
-                taskDate={task.taskDate}
-              />
-            )) }
+            <div className={`list__cardWrapper ${isOver ? 'list__cardWrapper--over' : ''}`}>
+              { taskItems.map((task: TaskCardConfig, index: number) => (
+                <TaskCard 
+                  {...task}
+                  key={task.id}
+                  listId={listConfig.id}
+                />
+              )) }
+              { (!taskItems.length && !isOver ) && (
+                <p>No Tasks</p>
+              ) }
+            </div>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
     </div>
-  )
-}
-
-const List = (props: ListWrapperProps) => {
-  const { title, listId } = props;
-
-  let taskItems: Array<TaskCardConfig> = [];
-  const taskLists = useSelector((state: RootState) => (
-    state.taskCards.listCards
-  ));
-  
-  if (has(taskLists, listId) && taskLists[listId]) {
-    taskItems = taskLists[listId];
-  }
-
-  return (
-    <ListComponent
-      title={title}
-      items={taskItems}
-    />
   );
 };
 
-List.defaultProps = listWrapperProps;
-ListComponent.defaultProps = listDefaultProps;
-
-
-export { ListComponent };
 export default List;

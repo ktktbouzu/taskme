@@ -8,6 +8,10 @@
   margin-bottom: 10px;
 }
 
+.taskCard:active:hover {
+  cursor: grab;
+}
+
 div.card.taskCard--old {
   background-color: #F6EEE3
 }
