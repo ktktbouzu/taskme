@@ -1,3 +1,18 @@
+html {
+  --app-white-1: #FFFFFF;
+
+  --app-gray-1: #CCCCCC;
+  --app-gray-2: #EBEBEB;
+  --app-gray-3: #9E9E9E;
+
+  --app-black-1: #000000;
+  --app-black-2: #525252;
+
+  --app-secondary: #D55BEC;
+
+  --app-brown-1: #C17C74;
+}
+
 body, html, #root {
   height: 100%;
   width: 100%;

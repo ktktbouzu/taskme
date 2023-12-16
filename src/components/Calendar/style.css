@@ -11,9 +11,23 @@
 }
 
 .calendar__headerYear {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   background-color: var(--app-secondary);
   padding-top: 1%;
   padding-bottom: 1%;
+}
+
+.calendar__headerYear > h4 {
+  margin-bottom: 0px;
+}
+
+.calendar__headerYear > button {
+  background-color: transparent;
+  border: none;
+  color: var(--app-white-1);
 }
 
 .calendar__headerCol {
@@ -35,12 +49,23 @@ div.calendar__datesCell {
   padding-bottom: 3%;
 }
 
-div.calendar__datesCell--muted {
-  background-color: var(--app-gray-2);
+div.calendar__datesCell:hover {
+  cursor: pointer;
+}
+
+div.calendar__datesCell--selected {
+  background-color: var(--app-brown-1);
+  color: var(--app-white-1);
 }
 
 div.calendar__datesCell--muted {
-   color: var(--app-gray-3);
+  background-color: var(--app-gray-2);
+  color: var(--app-gray-3);
+}
+
+div.calendar__datesCell--today {
+  color: var(--app-secondary);
+  font-weight: 700;
 }
 
 div.calendar__datesRow {
