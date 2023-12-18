@@ -36,7 +36,6 @@ const Board = (props: BoardProps) => {
         <Row>
           <Col>
             {/** Calendar */}
-            <Calendar />
           </Col>
         </Row>
         <Row>
@@ -53,7 +52,7 @@ const Board = (props: BoardProps) => {
           ))}
         </Row>
       </Container>
-      <Modal show={true}>
+      <Modal show={false}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
