@@ -1,0 +1,74 @@
+.calendar,
+.calendar__headerYear {
+  border: 0.5px solid var(--app-gray-1);
+}
+
+.calendar__headerYear,
+.calendar__headerCol {
+  text-align: center;
+  font-size: 1rem;
+  color: var(--app-white-1);
+}
+
+.calendar__headerYear {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--app-secondary);
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.calendar__headerYear > h4 {
+  margin-bottom: 0px;
+}
+
+.calendar__headerYear > button {
+  background-color: transparent;
+  border: none;
+  color: var(--app-white-1);
+}
+
+.calendar__headerCol {
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+  background-color: var(--app-secondary);
+  border-right: 0.5px solid var(--app-gray-1);
+  border-left: 0.5px solid var(--app-gray-1);
+
+}
+
+div.calendar__datesCell {
+  background-color: var(--app-white-1);
+  color: var(--app-black-2);
+  flex: 1 0 14.28%;
+  text-align: center;
+  border: 0.5px solid var(--app-gray-1);
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+div.calendar__datesCell:hover {
+  cursor: pointer;
+}
+
+div.calendar__datesCell--selected {
+  background-color: var(--app-brown-1);
+  color: var(--app-white-1);
+}
+
+div.calendar__datesCell--muted {
+  background-color: var(--app-gray-2);
+  color: var(--app-gray-3);
+}
+
+div.calendar__datesCell--today {
+  color: var(--app-secondary);
+  font-weight: 700;
+}
+
+div.calendar__datesRow {
+  display: flex;
+  flex-direction: row;
+}
