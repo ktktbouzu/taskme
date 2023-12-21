@@ -30,13 +30,14 @@
   color: var(--app-white-1);
 }
 
-.calendar__headerCol {
+div.col.calendar__headerCol {
   padding-top: 1.5%;
   padding-bottom: 1.5%;
   background-color: var(--app-secondary);
   border-right: 0.5px solid var(--app-gray-1);
   border-left: 0.5px solid var(--app-gray-1);
-
+  padding-right: 1%;
+  padding-left: 1%;
 }
 
 div.calendar__datesCell {

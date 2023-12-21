@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import moment from 'moment';
 import {
   Container,
@@ -90,13 +90,21 @@ const Calendar = () => {
   const currDateObj = getDateObj(currDate);
   const dates = getDates(currDateObj.year, currDateObj.month);
   
-  const getPrevious = () => {
-    setCurrDate(moment(currDate).subtract(1, 'month').format('YYYY-MM-DD'));
-  }
+  const getPrevious = useCallback(
+    (event: any) => {
+      event.preventDefault();
+      setCurrDate(moment(currDate).subtract(1, 'month').format('YYYY-MM-DD'));
+    },
+    [ currDate ]
+  );
 
-  const getNext = () => {
-    setCurrDate(moment(currDate).add(1, 'month').format('YYYY-MM-DD'));
-  }
+  const getNext = useCallback(
+    (event: any) => {
+      event.preventDefault();
+      setCurrDate(moment(currDate).add(1, 'month').format('YYYY-MM-DD'));
+    },
+    [ currDate ]
+  );
 
   const onCellClick = (value: any) => {
     let currSelected:Record<string, boolean> = { ...selected };
