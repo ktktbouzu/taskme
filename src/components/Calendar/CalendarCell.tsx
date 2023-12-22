@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Col
 } from 'react-bootstrap';
@@ -29,7 +29,6 @@ const CalendarCell = (props: CalendarCellProps) => {
 
   const selectHandler = () => {
     if (!props.muted) {
-      // setIsSelected(!isSelected);
       props.onCellClick(props.dateValue);
     }
   }

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import moment from 'moment';
 import {
   Container,
@@ -15,6 +15,15 @@ type DateConfig = {
   type: string,
   value: string,
   displayVal: string|number
+};
+
+type CalendarProps = {
+  multiple?: boolean,
+  onClick?: (currSelected: string[]) => void
+};
+
+const calendarDefaultProps = {
+  multiple: false
 };
 
 const getDates = (year: number, month: number) => {
@@ -72,7 +81,7 @@ const getDateObj = (dateString: string) => {
   };
 }
 
-const Calendar = () => {
+const Calendar = ({ multiple, onClick }: CalendarProps) => {
   const [ currDate, setCurrDate ] = useState(moment().format('YYYY-MM-DD'));
   const [ selected, setSelected ] = useState({});
   const [ today ] = useState(moment().format('YYYY-MM-DD'));
@@ -105,18 +114,38 @@ const Calendar = () => {
     },
     [ currDate ]
   );
+  
+  useEffect(() => {
+    if (onClick) {
+      onClick(Object.keys(selected));
+    }  
+  }, [ selected, onClick ]);
 
-  const onCellClick = (value: any) => {
-    let currSelected:Record<string, boolean> = { ...selected };
+  const onCellClick = useCallback(
+    (value: any) => {
+      if (
+        !multiple && 
+        Object.keys(selected).length === 1 && 
+        !has(selected, value)
+      ) {
+        return;
+      }
 
-    if (has(currSelected, value)) {
-      delete currSelected[value];
-    } else {
-      currSelected =  { ...currSelected, [value]: true };      
-    }
+      setSelected((nextSelected) => {
+        let currSelected:Record<string, boolean> = { ...nextSelected };
 
-    setSelected(currSelected);
-  }
+        if (has(currSelected, value)) {
+          const { [value]: deleted, ...remainSelected } = currSelected;
+          currSelected = { ...remainSelected };
+        } else {
+          currSelected = { ...currSelected, [value]: true };      
+        }
+        
+        return { ...currSelected };
+      });
+    },
+    [ multiple, selected ]
+  );
   
   return (
     <Container fluid className="calendar">
@@ -158,5 +187,7 @@ const Calendar = () => {
     </Container>    
   )
 };
+
+Calendar.defaultProps = calendarDefaultProps;
 
 export default Calendar;
